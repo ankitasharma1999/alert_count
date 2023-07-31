@@ -1,3 +1,3 @@
-variable "condition" {
-  type = map(any)
+variable "alert_loop" {
+    type = map(any)  
 }
