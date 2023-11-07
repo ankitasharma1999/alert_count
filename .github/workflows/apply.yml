@@ -1,4 +1,3 @@
-[2:41 PM] Tushar Pareek
 # This is a basic workflow to help you get started with Actions
  
 name: Terraform-init-apply
@@ -22,7 +21,7 @@ jobs:
 
     env:
 
-        working-directory: ./s3
+        working-directory: ./
  
  
     steps:
@@ -47,7 +46,7 @@ jobs:
 
           aws-session-token :     ${{ secrets.AWS_SESSION_TOKEN }}
 
-          aws-region : ap-south-1
+          aws-region : us-west-2
  
       - name: Deploy infrastructure with Terraform
 
