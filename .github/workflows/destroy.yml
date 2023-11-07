@@ -1,0 +1,62 @@
+# workflow to help you get started with Actions
+ 
+name: Terraform-destroy
+ 
+# Controls when the workflow will run
+
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+
+  workflow_dispatch:
+ 
+ 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+ 
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    env:
+
+        working-directory: ./
+ 
+ 
+    steps:
+
+      - name: Checkout code
+
+        uses: actions/checkout@v3
+ 
+      - name: Set up Terraform
+
+        uses: hashicorp/setup-terraform@v2
+ 
+      - name: Configure AWS Credentials
+
+        uses: aws-actions/configure-aws-credentials@v2
+
+        with:
+
+          aws-access-key-id :  ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+          aws-secret-access-key : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+          aws-session-token :     ${{ secrets.AWS_SESSION_TOKEN }}
+
+          aws-region : us-west-2
+ 
+      - name: Deploy infrastructure with Terraform
+
+        working-directory: ${{env.working-directory}}
+
+        run: |
+
+          terraform init
+
+          terraform destroy 
+
+ 
+        
